@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Upload</title>
+    <style>
+  article, aside, figure, footer, header, hgroup,
+  menu, nav, section { display: block; }
+    </style>
+    <script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/jquery-ui.min.js"></script>
+
+</head>
+<body>
+<h1>File Uploader</h1>
+<form id="upload-form" action="{{ url_for('upload') }}" method="POST" enctype="multipart/form-data">
+    <input type="file" name="file" accept="image/" onchange="readURL(this);">
+    <input type="submit" name = "classifier" value="KNN" id="KNN" >
+    <!--<input type="submit" name = "classifier" value="CNN" id="CNN">-->
+    <!--<input type="submit" name = "classifier" value="ES" id="ES">-->
+</form>
+<hr />
+
+ <img id="blah" src="#" alt="your image will be shown here" />
+
+<br>
+<br>
+<br>
+<br>
+<br>
+
+{% raw %}
+  <img src="{{ user_image }}" alt="User Image">
+{% endraw %}
+
+<script language="javascript" type="text/javascript">
+    function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#blah')
+                        .attr('src', e.target.result)
+                        .width(150)
+                        .height(200);
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+</script>
+</body>
+</html>

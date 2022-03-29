@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!--<link href="/home/sethiamayank14/PycharmProjects/project2/src/static/mysheet.css" rel="stylesheet" type="text/css"> -->
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+<br>
+<br>
+<form id="upload-form" action="{{ url_for('upload') }}" method="POST" enctype="multipart/form-data">
+    <div class="container p-y-1">
+      <div class="row m-b-1" id="inner">
+        <div class="col-sm-6 offset-sm-3" >
+          <button type="button" class="btn btn-primary btn-block" onclick="document.getElementById('inputFile').click()">Add Image</button>
+          <div class="form-group inputDnD">
+            <label class="sr-only" for="inputFile">File Upload</label>
+            <input type="file" class="form-control-file text-primary font-weight-bold" id="inputFile" accept="image/*" onchange="readUrl(this)" data-title="Drag and drop a file">
+              <br>
+              <br>
+              <img id="blah" src="http://placehold.it/180" alt="Please Upload your image" style ="text-align:center;" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <br>
+    <br>
+     <br>
+    <br>
+
+    <div>
+
+
+
+    <input type="file" name="file" accept="image/" >
+    <input type="submit" name = "classifier" value="KNN" id="KNN">
+    <input type="submit" name = "classifier" value="CNN" id="CNN">
+    <input type="submit" name = "classifier" value="ES" id="ES">
+
+    <br>
+    <br>
+  <!--<input type="radio" name="classifier" value="KNN Classifier"> KNN Classifier<br>-->
+  <!--<input type="radio" name="classifier" value="CNN Classifier">CNN Classifier<br>-->
+  <!--<input type="radio" name="classifier" value="Elastic Search"> Elastic Search-->
+
+
+
+</form>
+
+    </div>
+
+    <script>
+        function readUrl(input) {
+
+          if (input.files && input.files[0]) {
+            let reader = new FileReader();
+            reader.onload = (e) => {
+              let imgData = e.target.result;
+              let imgName = input.files[0].name;
+              input.setAttribute("data-title", imgName);
+              console.log(e.target.result);
+            }
+
+            reader.onload = function (e) {
+                $('#blah')
+                    .attr('src', e.target.result)
+                    .width(150)
+                    .height(200);
+            };
+            reader.readAsDataURL(input.files[0]);
+          }
+
+        }
+    </script>onclick="reset_msg();
+
+
+<style>
+ .inputDnD .form-control-file {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 6em;
+  outline: none;
+  visibility: hidden;
+  cursor: pointer;
+  background-color: #c61c23;
+  box-shadow: 0 0 5px solid currentColor;
+
+}
+.inputDnD .form-control-file:before {
+  content: attr(data-title);
+  position: absolute;
+  top: 0.5em;
+  left: 0;
+  width: 100%;
+  min-height: 6em;
+  line-height: 2em;
+  padding-top: 1.5em;
+  opacity: 1;
+  visibility: visible;
+  text-align: center;
+  border: 0.25em dashed currentColor;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  overflow: hidden;
+}
+.inputDnD .form-control-file:hover:before {
+  border-style: solid;
+  box-shadow: inset 0px 0px 0px 0.25em currentColor;
+}
+
+body {
+  background-color: #f7f7f9;
+}
+
+#inner {
+  width: 80%;
+  margin: 0 auto;
+  align: center;
+}
+
+</style>
+
+</body>
+</html>
